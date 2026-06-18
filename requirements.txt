@@ -1,4 +1,4 @@
-autogen
+pyautogen
 openai
 python-dotenv
 fastapi

@@ -45,6 +45,7 @@ def extract_analytics_json(chat_result):
     return None
 
 @app.post("/api/evaluate")
+@app.post("/evaluate")
 async def evaluate_query(payload: QueryRequest):
     user_input = payload.message.strip()
     if not user_input:
