@@ -51,8 +51,8 @@ async def evaluate_query(payload: QueryRequest):
     if not user_input:
         raise HTTPException(status_code=400, detail="Empty query message.")
         
-    api_key = os.getenv("OPENAI_API_KEY", "")
-    is_placeholder = not api_key or "your_openai_api_key" in api_key
+    api_key = os.getenv("GROQ_API_KEY", "")
+    is_placeholder = not api_key or "your_" in api_key
     
     if is_placeholder:
         # Mock responses for demonstration purposes when API key is a placeholder

@@ -6,20 +6,15 @@ import autogen
 # Load environment variables
 load_dotenv()
 
-# Setup LLM configuration
-api_key = os.getenv("OPENAI_API_KEY", "your_openai_api_key_here")
-model_name = os.getenv("OPENAI_MODEL_NAME", "gpt-4o")
+# Setup LLM configuration for Groq
+api_key = os.getenv("GROQ_API_KEY", "")
+model_name = "llama-3.3-70b-versatile"
 
 config_item = {
     "model": model_name,
     "api_key": api_key,
+    "base_url": "https://api.groq.com/openai/v1"
 }
-
-# Automatically configure for Groq if key starts with 'gsk_'
-if api_key.startswith("gsk_"):
-    config_item["base_url"] = "https://api.groq.com/openai/v1"
-    if model_name.startswith("gpt-"):
-        config_item["model"] = "llama-3.3-70b-versatile"
 
 llm_config = {
     "config_list": [config_item],
