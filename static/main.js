@@ -46,7 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (!response.ok) {
-                throw new Error(`Server returned error: ${response.statusText}`);
+                const errorText = await response.text();
+                throw new Error(`Server returned error: ${response.statusText} - Details: ${errorText}`);
             }
 
             const data = await response.json();
