@@ -3,95 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LabShield AI - Security Dashboard</title>
+    <title>LabShield AI – Academic Integrity Guardian</title>
+    <meta name="description" content="LabShield AI is an autonomous multi-agent guardrail that protects academic integrity by analyzing student prompts for direct code requests.">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="glow-container">
-        <div class="glow-orb" id="orb1"></div>
-        <div class="glow-orb" id="orb2"></div>
+    <!-- Animated Background -->
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="grid-overlay"></div>
     </div>
 
-    <div class="app-container">
-        <header>
-            <div class="logo">
-                <span class="shield-icon">🛡️</span>
-                <h1>LabShield <span class="accent">AI</span></h1>
+    <div class="app-wrapper">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-inner">
+                <div class="brand">
+                    <div class="brand-icon">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                            <path d="M18 3L31 10V22L18 33L5 22V10L18 3Z" stroke="url(#shieldGrad)" stroke-width="2" fill="url(#shieldFill)"/>
+                            <path d="M18 10L24 14V20L18 26L12 20V14L18 10Z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none"/>
+                            <circle cx="18" cy="18" r="3" fill="url(#shieldGrad)"/>
+                            <defs>
+                                <linearGradient id="shieldGrad" x1="5" y1="3" x2="31" y2="33">
+                                    <stop offset="0%" stop-color="#00f0ff"/>
+                                    <stop offset="100%" stop-color="#7c3aed"/>
+                                </linearGradient>
+                                <linearGradient id="shieldFill" x1="5" y1="3" x2="31" y2="33">
+                                    <stop offset="0%" stop-color="rgba(0,240,255,0.08)"/>
+                                    <stop offset="100%" stop-color="rgba(124,58,237,0.08)"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="brand-text">
+                        <h1>LabShield <span class="gradient-text">AI</span></h1>
+                        <p class="tagline">Autonomous Academic Integrity Guardian</p>
+                    </div>
+                </div>
+                <div class="header-status">
+                    <span class="status-dot"></span>
+                    <span class="status-label">System Active</span>
+                </div>
             </div>
-            <p class="subtitle">Autonomous Academic Integrity Shield & Agent Guardrail</p>
         </header>
 
-        <main>
-            <!-- Control Panel -->
-            <section class="card control-panel">
-                <h2>Analyze Prompt</h2>
-                <p class="panel-desc">Test your user request against the guardrail agents to check for direct answers, hints, and overall integrity.</p>
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Input Section -->
+            <section class="glass-card input-section" id="inputSection">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                        </svg>
+                    </div>
+                    <h2>Analyze Prompt</h2>
+                </div>
+                <p class="card-description">Enter a student query to test it against the multi-agent guardrail pipeline. The system will classify the request and provide an integrity analysis.</p>
                 
-                <div class="input-group">
-                    <textarea id="promptInput" placeholder="Enter student query here... e.g. How do I solve lab 3?"></textarea>
-                    <div class="action-buttons">
-                        <button id="evaluateBtn" class="btn btn-primary">
-                            <span class="btn-text">Evaluate Query</span>
-                            <span class="loader hidden"></span>
-                        </button>
-                        <button id="demoBtn" class="btn btn-secondary">Run Demo Fallback</button>
+                <div class="input-area">
+                    <textarea id="promptInput" placeholder="e.g. Give me the complete assembly code for lab 3..." rows="3"></textarea>
+                    <div class="input-footer">
+                        <div class="char-count"><span id="charCount">0</span> characters</div>
+                        <div class="btn-group">
+                            <button id="demoBtn" class="btn btn-ghost" type="button">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="5 3 19 12 5 21 5 3"/>
+                                </svg>
+                                Demo
+                            </button>
+                            <button id="evaluateBtn" class="btn btn-primary" type="button">
+                                <span class="btn-text">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+                                    </svg>
+                                    Evaluate
+                                </span>
+                                <span class="loader hidden"></span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Status Message (e.g. Mocked warning) -->
+            <!-- Notice Banner -->
             <div id="noticeBanner" class="notice-banner hidden">
-                <span class="info-icon">ℹ️</span>
-                <p>Running in **Mock Mode** because `OPENAI_API_KEY` is not set in `.env`.</p>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+                <p>Running in <b>Mock Mode</b> because <code>GROQ_API_KEY</code> is not configured.</p>
             </div>
 
-            <!-- Dashboard Results Layout -->
-            <div class="dashboard-grid">
-                <!-- Agent Workflow Visualization -->
-                <section class="card workflow-card">
-                    <h2>Multi-Agent Workflow</h2>
+            <!-- Results Grid -->
+            <div class="results-grid">
+                <!-- Workflow Panel -->
+                <section class="glass-card workflow-panel">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                            </svg>
+                        </div>
+                        <h2>Agent Pipeline</h2>
+                    </div>
                     <div class="workflow-timeline" id="workflowTimeline">
-                        <div class="timeline-placeholder">
-                            Enter a query to visualize the agent workflow validation sequence...
+                        <div class="timeline-empty">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.3">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                            <span>Submit a query to see the agent workflow</span>
                         </div>
                     </div>
                 </section>
 
-                <!-- Final Evaluation Output -->
-                <section class="card evaluation-card">
-                    <h2>Analytics & Guard Output</h2>
-                    <div id="analyticsOutput" class="analytics-content placeholder-state">
-                        <div class="score-radial-container">
-                            <div class="radial-bg">
-                                <span class="radial-value" id="scoreVal">--</span>
-                                <span class="radial-label">Integrity Score</span>
+                <!-- Analytics Panel -->
+                <section class="glass-card analytics-panel">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>
+                            </svg>
+                        </div>
+                        <h2>Integrity Analysis</h2>
+                    </div>
+                    
+                    <div id="analyticsOutput" class="analytics-body idle-state">
+                        <!-- Score Ring -->
+                        <div class="score-ring-wrapper">
+                            <svg class="score-ring" viewBox="0 0 120 120">
+                                <circle class="ring-bg" cx="60" cy="60" r="52"/>
+                                <circle class="ring-progress" id="scoreRing" cx="60" cy="60" r="52"
+                                    stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+                            </svg>
+                            <div class="score-inner">
+                                <span class="score-number" id="scoreVal">--</span>
+                                <span class="score-label">Score</span>
                             </div>
                         </div>
-                        <div class="metrics-grid">
-                            <div class="metric-item">
-                                <span class="metric-label">Status</span>
-                                <span class="metric-value badge" id="statusBadge">Idle</span>
+
+                        <!-- Metric Cards -->
+                        <div class="metric-cards">
+                            <div class="metric-card">
+                                <span class="metric-title">Verdict</span>
+                                <span class="metric-badge" id="statusBadge">Idle</span>
                             </div>
-                            <div class="metric-item">
-                                <span class="metric-label">Direct Request</span>
-                                <span class="metric-value" id="directRequestVal">--</span>
+                            <div class="metric-card">
+                                <span class="metric-title">Direct Request</span>
+                                <span class="metric-result" id="directRequestVal">--</span>
                             </div>
                         </div>
-                        <div class="raw-json-container">
-                            <h3>Raw JSON Metrics</h3>
+
+                        <!-- Raw JSON -->
+                        <div class="json-section">
+                            <div class="json-header">
+                                <span>Raw Output</span>
+                                <button class="btn-copy" id="copyJsonBtn" title="Copy JSON">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                    </svg>
+                                </button>
+                            </div>
                             <pre><code id="jsonOutput">{}</code></pre>
                         </div>
                     </div>
                 </section>
             </div>
         </main>
-        
-        <footer>
-            <p>Powered by AG2 AutoGen Framework & Antigravity</p>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Powered by <span class="gradient-text">AG2 AutoGen</span> &amp; <span class="gradient-text">Groq</span></p>
         </footer>
     </div>
 
