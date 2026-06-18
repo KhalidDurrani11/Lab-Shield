@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabShield AI - Security Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glow-container">
+        <div class="glow-orb" id="orb1"></div>
+        <div class="glow-orb" id="orb2"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="shield-icon">🛡️</span>
+                <h1>LabShield <span class="accent">AI</span></h1>
+            </div>
+            <p class="subtitle">Autonomous Academic Integrity Shield & Agent Guardrail</p>
+        </header>
+
+        <main>
+            <!-- Control Panel -->
+            <section class="card control-panel">
+                <h2>Analyze Prompt</h2>
+                <p class="panel-desc">Test your user request against the guardrail agents to check for direct answers, hints, and overall integrity.</p>
+                
+                <div class="input-group">
+                    <textarea id="promptInput" placeholder="Enter student query here... e.g. How do I solve lab 3?"></textarea>
+                    <div class="action-buttons">
+                        <button id="evaluateBtn" class="btn btn-primary">
+                            <span class="btn-text">Evaluate Query</span>
+                            <span class="loader hidden"></span>
+                        </button>
+                        <button id="demoBtn" class="btn btn-secondary">Run Demo Fallback</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Status Message (e.g. Mocked warning) -->
+            <div id="noticeBanner" class="notice-banner hidden">
+                <span class="info-icon">ℹ️</span>
+                <p>Running in **Mock Mode** because `OPENAI_API_KEY` is not set in `.env`.</p>
+            </div>
+
+            <!-- Dashboard Results Layout -->
+            <div class="dashboard-grid">
+                <!-- Agent Workflow Visualization -->
+                <section class="card workflow-card">
+                    <h2>Multi-Agent Workflow</h2>
+                    <div class="workflow-timeline" id="workflowTimeline">
+                        <div class="timeline-placeholder">
+                            Enter a query to visualize the agent workflow validation sequence...
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Final Evaluation Output -->
+                <section class="card evaluation-card">
+                    <h2>Analytics & Guard Output</h2>
+                    <div id="analyticsOutput" class="analytics-content placeholder-state">
+                        <div class="score-radial-container">
+                            <div class="radial-bg">
+                                <span class="radial-value" id="scoreVal">--</span>
+                                <span class="radial-label">Integrity Score</span>
+                            </div>
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <span class="metric-label">Status</span>
+                                <span class="metric-value badge" id="statusBadge">Idle</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Direct Request</span>
+                                <span class="metric-value" id="directRequestVal">--</span>
+                            </div>
+                        </div>
+                        <div class="raw-json-container">
+                            <h3>Raw JSON Metrics</h3>
+                            <pre><code id="jsonOutput">{}</code></pre>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Powered by AG2 AutoGen Framework & Antigravity</p>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

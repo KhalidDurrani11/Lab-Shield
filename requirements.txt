@@ -1,0 +1,6 @@
+autogen
+openai
+python-dotenv
+fastapi
+uvicorn
+mangum
